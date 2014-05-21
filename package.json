@@ -1,0 +1,21 @@
+{
+  "name": "file-feed",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wraithan/file-feed.git"
+  },
+  "author": "Wraithan <wraithan.net> (xwraithanx@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wraithan/file-feed/issues"
+  },
+  "homepage": "https://github.com/wraithan/file-feed",
+  "dependencies": {
+  }
+}
