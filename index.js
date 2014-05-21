@@ -3,21 +3,30 @@ var path = require('path')
 var http = require('http')
 var config = require('./config')
 
+var fileList = []
+var names = []
+
 var server = http.createServer(function (req, res) {
   console.log(req.url);
-
-  var fileList = []
 
   fs.readdir(config.path, function (err, files) {
     var len = files.length
     for (var i = 0; i < len; i++) {
       var file = files[i]
-      var stats = fs.statSync(path.join(config.path, file))
-      fileList.push({
-        name: file,
-        value: stats.ctime.getFullYear()+'-'+(stats.ctime.getMonth()+1)+'-'+stats.ctime.getDate(),
-        date: stats.ctime
-      })
+      if (names.indexOf(file) === -1) {
+        var stats = fs.statSync(path.join(config.path, file))
+        var striper = /(.*)\.S\d\d/
+        var name = file
+        if (striper.exec(file)) {
+          name = striper.exec(file)[1]
+        }
+        fileList.push({
+          name: name.replace(/[\.\-_]/g, ' '),
+          value: stats.ctime.getFullYear()+'-'+(stats.ctime.getMonth()+1)+'-'+stats.ctime.getDate(),
+          date: stats.ctime
+        })
+        names.push(file)
+      }
     }
 
     fileList.sort(function (a, b) {
