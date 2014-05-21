@@ -20,8 +20,12 @@ var server = http.createServer(function (req, res) {
         if (striper.exec(file)) {
           name = striper.exec(file)[1]
         }
+        name = name.replace(/[\.\-_]/g, ' ')
+        if (config.rewrite && Object.keys(config.rewrite).indexOf(name) !== -1) {
+          name = config.rewrite[name]
+        }
         fileList.push({
-          name: name.replace(/[\.\-_]/g, ' '),
+          name: name,
           value: stats.ctime.getFullYear()+'-'+(stats.ctime.getMonth()+1)+'-'+stats.ctime.getDate(),
           date: stats.ctime
         })
